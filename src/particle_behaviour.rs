@@ -1,14 +1,14 @@
 use ::rand::Rng;
 use macroquad::prelude::*;
 
-use crate::bounce_logic::edges;
+use crate::bounce_logic::{detect_particle, edges};
 
 const GRAVITY_ACCELERATION: f32 = 500.0;
 
 pub struct Particle {
     pub radius: f32,
     pub position: Vec2,
-    velocity: Vec2,
+    pub velocity: Vec2,
 }
 //function that returns a Particle type
 pub fn particles_initialize() -> Particle {
@@ -41,7 +41,7 @@ pub fn create_particles() -> Vec<Particle> {
 //[Particle] refers to a slice type: a sequence of particles
 pub fn update_particle(particles: &mut [Particle], dt: f32) {
     //loop over the vector, it's mutable to allow change.
-    for particle in particles {
+    for particle in particles.iter_mut() {
         //gravity for the particles
         particle.velocity.y += GRAVITY_ACCELERATION * dt;
         //velocity for the particle
@@ -53,4 +53,5 @@ pub fn update_particle(particles: &mut [Particle], dt: f32) {
             particle.radius,
         )
     }
+    detect_particle(particles);
 }
