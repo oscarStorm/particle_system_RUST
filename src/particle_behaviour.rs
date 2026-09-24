@@ -6,6 +6,7 @@ use crate::bounce_logic::{detect_particle, edges};
 const GRAVITY_ACCELERATION: f32 = 500.0;
 
 pub struct Particle {
+    pub mass: f32,
     pub radius: f32,
     pub position: Vec2,
     pub velocity: Vec2,
@@ -18,7 +19,8 @@ pub fn particles_initialize() -> Particle {
     let mut random_number = ::rand::thread_rng();
 
     Particle {
-        radius: 20.0,
+        mass: 10.0,
+        radius: 10.0,
         position: Vec2 {
             x: random_number.gen_range(radius..max_number_x),
             y: random_number.gen_range(radius..max_number_y),
@@ -32,7 +34,7 @@ pub fn particles_initialize() -> Particle {
 pub fn create_particles() -> Vec<Particle> {
     let mut particles = Vec::new();
 
-    for _ in 0..100 {
+    for _ in 0..50 {
         particles.push(particles_initialize());
     }
     particles
