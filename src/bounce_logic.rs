@@ -1,7 +1,7 @@
 use crate::particle_behaviour::Particle;
 use macroquad::prelude::*;
-const FRICTION_FORCE: f32 = 0.82;
-const FRICTION: f32 = 0.95;
+const FRICTION_FORCE: f32 = 0.92;
+const FRICTION: f32 = 0.92;
 pub fn edges(position: &mut Vec2, velocity: &mut Vec2, radius: f32) {
     if position.x <= radius {
         position.x = radius;
@@ -75,7 +75,7 @@ pub fn detect_particle(particles: &mut [Particle]) {
                 let p1_v_n =
                     ((p1_m - p2_m) / (p1_m + p2_m)) * p1_u + ((2.0 * p2_m) / (p1_m + p2_m)) * p2_u;
                 let p2_v_n =
-                    ((2.0 * p1_m) / (p1_m + p2_m)) * p1_u + ((p1_m - p2_m) / (p1_m + p2_m)) * p2_u;
+                    ((2.0 * p1_m) / (p1_m + p2_m)) * p1_u + ((p2_m - p1_m) / (p1_m + p2_m)) * p2_u;
 
                 let p1_delta_v = p1_v_n - p1_u;
                 let p2_delta_v = p2_v_n - p2_u;

@@ -3,7 +3,7 @@ use macroquad::prelude::*;
 
 use crate::bounce_logic::{detect_particle, edges};
 
-const GRAVITY_ACCELERATION: f32 = 500.0;
+const GRAVITY_ACCELERATION: f32 = 400.0;
 
 pub struct Particle {
     pub mass: f32,
@@ -13,13 +13,13 @@ pub struct Particle {
 }
 //function that returns a Particle type
 pub fn particles_initialize() -> Particle {
-    let radius: f32 = 5.0;
+    let mut random_number = ::rand::thread_rng();
+    let radius = random_number.gen_range(1.0..100.0);
     let max_number_x = screen_width() - radius;
     let max_number_y = screen_height() - radius;
-    let mut random_number = ::rand::thread_rng();
 
     Particle {
-        mass: 10.0,
+        mass: radius,
         radius,
         position: Vec2 {
             x: random_number.gen_range(radius..max_number_x),
@@ -34,7 +34,7 @@ pub fn particles_initialize() -> Particle {
 pub fn create_particles() -> Vec<Particle> {
     let mut particles = Vec::new();
 
-    for _ in 0..500 {
+    for _ in 0..20 {
         particles.push(particles_initialize());
     }
     particles

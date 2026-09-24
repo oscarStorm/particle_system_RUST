@@ -14,6 +14,9 @@ async fn main() {
         //delta for framerate
         let dt = get_frame_time();
         clear_background(BLACK);
+        if is_key_pressed(KeyCode::R) {
+            particles = create_particles();
+        }
         update_particle(&mut particles, dt);
 
         //draw particle element from particles reference (the array)
